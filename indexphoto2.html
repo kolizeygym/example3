@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Колизей | Фитнес-зал в Кызылорде</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ========= ИНТРО ========= */
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      z-index: 9999;
+      animation: fadeOutIntro 3.5s ease forwards;
+    }
+
+    .intro span {
+      display: block;
+      font-size: 2.5rem;
+      color: #fff;
+      animation: zoomText 2s ease forwards;
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    @keyframes zoomText {
+      0% { transform: scale(0.6); opacity: 0; }
+      40% { transform: scale(1); opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeOutIntro {
+      0%, 85% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* ========= НАВИГАЦИЯ ========= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 15px 30px;
+      display: none;
+      justify-content: center;
+      gap: 40px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.2s;
+      padding: 5px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover {
+      border-bottom-color: #ffcc00;
+      transform: translateY(-2px);
+    }
+
+    /* ========= СЕКЦИИ ========= */
+    section {
+      padding: 100px 24px 80px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.5s; }
+    section:nth-of-type(2) { animation-delay: 1s; }
+    section:nth-of-type(3) { animation-delay: 1.5s; }
+    section:nth-of-type(4) { animation-delay: 2s; }
+    section:nth-of-type(5) { animation-delay: 2.2s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: #ffcc00;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 3px;
+      background: #ffcc00;
+      border-radius: 3px;
+    }
+
+    /* прайс */
+    .price-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .price-list div {
+      background: #ffd700;
+      color: #000;
+      margin: 16px auto;
+      padding: 18px 22px;
+      max-width: 700px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 60px;
+      box-shadow: 0 6px 14px rgba(255, 221, 0, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: left;
+    }
+    .price-list div:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 20px rgba(255, 204, 0, 0.5);
+    }
+    .price-list strong {
+      color: #b45309;
+      font-size: 1.2rem;
+    }
+    .price-time {
+      font-size: 0.85rem;
+      color: #2c2c2c;
+      display: block;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* тренеры — информация сверху, квадратное фото снизу */
+    .trainers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .trainer-card {
+      background: #111;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 204, 0, 0.2);
+    }
+    .trainer-card:hover {
+      border-color: #ffcc00;
+      transform: translateY(-3px);
+    }
+    .trainer-info {
+      padding: 24px 26px 16px 26px;
+      text-align: left;
+      position: relative;
+    }
+    .trainer-info::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      bottom: 20px;
+      width: 5px;
+      background: #ffcc00;
+      border-radius: 4px;
+    }
+    .trainer-info strong {
+      font-size: 1.4rem;
+      color: #ffcc00;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .trainer-info p {
+      margin: 8px 0;
+      white-space: pre-line;
+      color: #ddd;
+      line-height: 1.5;
+    }
+    .trainer-info a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .trainer-info a:hover {
+      text-decoration: underline;
+    }
+    /* Квадратное фото 1:1 */
+    .trainer-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #1e1e1e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 204, 0, 0.3);
+    }
+    .trainer-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .trainer-card:hover .trainer-photo img {
+      transform: scale(1.02);
+    }
+
+    /* Фото зала — галерея квадратных фото */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .gallery-card {
+      background: #111;
+      border-radius: 24px;
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.2s;
+      border: 1px solid rgba(255, 204, 0, 0.3);
+    }
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffcc00;
+    }
+    .gallery-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #1c1c1c;
+      overflow: hidden;
+    }
+    .gallery-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .gallery-card:hover .gallery-photo img {
+      transform: scale(1.03);
+    }
+    .gallery-card p {
+      padding: 15px;
+      font-weight: 600;
+      color: #ffcc00;
+      text-align: center;
+    }
+
+    .btn {
+      background: #ffcc00;
+      color: #000;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      margin: 30px auto 0;
+      transition: 0.25s;
+      font-size: 1.1rem;
+    }
+    .btn:hover {
+      background: #e6b800;
+      transform: scale(1.02);
+    }
+
+    .info p {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .info a {
+      color: #ffcc00;
+      text-decoration: none;
+      border-bottom: 1px dashed #ffcc00;
+    }
+
+    footer {
+      background: #030303;
+      border-top: 2px solid #ffcc00;
+      padding: 40px 20px 25px;
+      margin-top: 40px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-col h4 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    .footer-col p, .footer-col a {
+      color: #ccc;
+      text-decoration: none;
+      line-height: 1.6;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .footer-col a:hover {
+      color: #ffcc00;
+    }
+    .social-links {
+      display: flex;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 20px;
+      border-top: 1px solid #222;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .go-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #ffcc00;
+      color: #000;
+      width: 50px;
+      height: 50px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 999;
+    }
+    .go-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        gap: 18px;
+        padding: 12px 16px;
+      }
+      nav a {
+        font-size: 0.85rem;
+      }
+      .gallery-card {
+        width: 240px;
+      }
+    }
+
+    .emoji-rain {
+      position: fixed;
+      pointer-events: none;
+      font-size: 2rem;
+      z-index: 10000;
+      animation: fall 1.2s linear forwards;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <span>ТВОЙ ПУТЬ</span>
+  <span>НАЧИНАЕТСЯ</span>
+  <span>ЗДЕСЬ</span>
+</div>
+
+<nav id="navbar">
+  <a href="#price">ПРАЙС</a>
+  <a href="#trainers">ТРЕНЕРЫ</a>
+  <a href="#gallery">ФОТО ЗАЛА</a>
+  <a href="#start">СТАРТ</a>
+  <a href="#about">О ЗАЛЕ</a>
+</nav>
+
+<section id="price">
+  <h2>ПРАЙС-ЛИСТ</h2>
+  <div class="price-list">
+    <div>💪 Абонемент (12 посещений) — <strong>12 000 ₸</strong><span class="price-time">⏰ 09:00 – 22:00</span></div>
+    <div>🎓 Студенческий / Школьный — <strong>8 000 ₸</strong><span class="price-time">⏰ 09:00 – 18:00</span></div>
+    <div>♾️ Безлимитный абонемент — <strong>20 000 ₸</strong><span class="price-time">⏰ Без ограничений</span></div>
+    <div>🏋️ Услуги тренера — <strong>от 20 000 ₸</strong><span class="price-time">🎯 Персональные тренировки</span></div>
+  </div>
+</section>
+
+<section id="trainers">
+  <h2>ТРЕНЕРСКИЙ СОСТАВ</h2>
+  <div class="trainers">
+    <div class="trainer-card"><div class="trainer-info"><strong>Стас</strong><p>Стаж более 10 лет<br>Женский и мужской тренер<br>🥈 Серебряный призёр IFBB на Чемпионате Казахстана<br>🥈🥉 Действующий спортсмен Men’s Physique</p><a href="https://www.instagram.com/tkdlov3_ifbb" target="_blank">📸 @tkdlov3_ifbb</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/155/400/400" alt="Фото Стаса"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Вероника</strong><p>Стаж 6 лет<br>Выступающий атлет IFBB<br>Личный результат — минус 20кг<br>Женский тренер, полное сопровождение 💯</p><a href="https://www.instagram.com/vera31fit" target="_blank">📸 @vera31fit</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/64/400/400" alt="Фото Вероники"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Ислам</strong><p>5-ый чемпион Казахстана по пауэрлифтингу<br>Действующий спортсмен по греко-римской борьбе<br>Мужской и женский тренер<br>Стаж более 4-х лет</p><a href="https://www.instagram.com/ilyassov.islam" target="_blank">📸 @ilyassov.islam</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/91/400/400" alt="Фото Ислама"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Татьяна</strong><p>Стаж более 8 лет<br>Женский тренер<br>Полное сопровождение, питание, результат на 💯</p><a href="https://www.instagram.com/ktl555" target="_blank">📸 @ktl555</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/29/400/400" alt="Фото Татьяны"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Берик</strong><p>Действующий спортсмен<br>Стаж более 7 лет<br>Призёр ММА<br>Женский тренинг, масса набор и похудение</p><a href="https://www.instagram.com/berik_fit.motivator" target="_blank">📸 @berik_fit.motivator</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/30/400/400" alt="Фото Берика"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Шаке</strong><p>КМС по кикбоксингу<br>4 года опыта в тренерстве<br>Сертифицирован (Ученый фитнес, Москва)<br>Амбассадор тестостерона<br>Реальные результаты у десятков клиентов</p><a href="https://www.instagram.com/shake_trener" target="_blank">📸 @shake_trener</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/81/400/400" alt="Фото Шаке"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Эрик</strong><p>Стаж 5 лет<br>Действующий спортсмен<br>Призёр ММА и лёгкой атлетики<br>Сопровождение, питание, результат обеспечен</p><a href="https://www.instagram.com/coach_eric_kzo" target="_blank">📸 @coach_eric_kzo</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/45/400/400" alt="Фото Эрика"></div></div>
+    <div class="trainer-card"><div class="trainer-info"><strong>Диана</strong><p>Стаж более 9 лет<br>🥈 Серебряная призёрка Азии (IFBB)<br>🥈🥇 Фитнес бикини, чемпионат Казахстана<br>-800 ккал за тренировку<br>Прокачаю не только тело, но и уверенность</p><a href="https://www.instagram.com/diana_zumba_fit" target="_blank">📸 @diana_zumba_fit</a></div><div class="trainer-photo"><img src="https://picsum.photos/id/82/400/400" alt="Фото Дианы"></div></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>ФОТО ЗАЛА</h2>
+  <div class="gallery">
+    <div class="gallery-card"><div class="gallery-photo"><img src="https://picsum.photos/id/129/400/400" alt="Тренажёрный зал"></div><p>🏋️ Тренажёрный зал</p></div>
+    <div class="gallery-card"><div class="gallery-photo"><img src="https://picsum.photos/id/143/400/400" alt="Кардиозона"></div><p>🏃‍♀️ Кардиозона</p></div>
+    <div class="gallery-card"><div class="gallery-photo"><img src="https://picsum.photos/id/133/400/400" alt="Групповые тренировки"></div><p>👥 Групповые тренировки</p></div>
+  </div>
+  <p style="margin-top: 20px; color: #aaa; font-size: 0.9rem;">⭐ Замените эти фото на реальные изображения вашего зала и тренеров</p>
+</section>
+
+<section id="start">
+  <h2>ГОТОВ НАЧАТЬ?</h2>
+  <a href="https://wa.me/77074676555" class="btn" target="_blank">💪 НАЧАТЬ ТРЕНИРОВКИ</a>
+</section>
+
+<section id="about">
+  <h2>О ЗАЛЕ</h2>
+  <div class="info">
+    <p>🏆 — 12 лет в сфере фитнеса</p>
+    <p>📍 — 2 локации в Кызылорде</p>
+    <p>🎓 — Опытные тренеры со стажем</p>
+    <p>🏢 <a href="https://2gis.kz/kyzylorda/geo/70000001082885979" target="_blank">ул. Желтоксан 12 (БЦ Бастау)</a></p>
+    <p>🏢 <a href="https://2gis.kz/kyzylorda/geo/70000001074349916" target="_blank">ул. Бегим Ана 30</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-col"><h4>КОЛИЗЕЙ</h4><p>Фитнес-зал №1 в Кызылорде</p><p>Двери открыты для сильных духом</p></div>
+    <div class="footer-col"><h4>КОНТАКТЫ</h4><p>📞 +7 707 467 6555 (WA)</p><p>📧 kolizey.fitness@kz</p><div class="social-links"><a href="https://www.instagram.com/kolizeygym.kzo" target="_blank">📷 Instagram</a><a href="https://wa.me/77074676555" target="_blank">💬 WhatsApp</a></div></div>
+    <div class="footer-col"><h4>АДРЕСА НА КАРТЕ</h4><p><a href="https://2gis.kz/kyzylorda/geo/70000001082885979" target="_blank">🗺️ Желтоксан 12</a></p><p><a href="https://2gis.kz/kyzylorda/geo/70000001074349916" target="_blank">🗺️ Бегим Ана 30</a></p></div>
+  </div>
+  <div class="copyright">© 2025 Фитнес-зал «Колизей» | Стань лучшей версией себя</div>
+</footer>
+
+<div class="go-top" id="goTopBtn">↑</div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      const intro = document.querySelector('.intro');
+      if (intro) intro.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      const nav = document.getElementById('navbar');
+      if (nav) nav.style.display = 'flex';
+    }, 3500);
+  });
+
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('#navbar a');
+  const goTopBtn = document.getElementById('goTopBtn');
+
+  function updateActiveNav() {
+    let current = '';
+    const scrollPos = window.scrollY + 200;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.borderBottom = '2px solid transparent';
+      if (link.getAttribute('href') === `#${current}`) {
+        link.style.borderBottom = '2px solid #ffcc00';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    updateActiveNav();
+    if (goTopBtn) {
+      if (window.scrollY > 600) goTopBtn.classList.add('show');
+      else goTopBtn.classList.remove('show');
+    }
+  });
+  if (goTopBtn) goTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  updateActiveNav();
+
+  const emojis = ['💪', '🏋️', '🦵', '🔥', '🥇', '🏆', '⚡', '🤸'];
+  let rainTimeout = null, activeRain = false;
+  function createEmojiRain(x, y) {
+    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+    const el = document.createElement('div');
+    el.classList.add('emoji-rain');
+    el.textContent = emoji;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1200);
+  }
+  function startRain(e) {
+    if (activeRain) return;
+    activeRain = true;
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => {
+        const randomX = e.clientX + (Math.random() - 0.5) * 100;
+        const randomY = e.clientY + (Math.random() - 0.5) * 40;
+        createEmojiRain(randomX, randomY);
+      }, i * 50);
+    }
+    if (rainTimeout) clearTimeout(rainTimeout);
+    rainTimeout = setTimeout(() => { activeRain = false; }, 800);
+  }
+  document.body.addEventListener('click', (e) => startRain(e));
+</script>
+</body>
+</html>
